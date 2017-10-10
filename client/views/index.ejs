@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login & Registration</title>
+    <style>
+        .error{
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        Email: <input type="email" name="email">
+        Password: <input type="password" name="password">
+        <input type="submit" value="Login">
+    </form>
+    <br>
+    <hr>
+    <% if(typeof(errors) != 'undefined' ) { %>
+        <% for (let x in errors.errors) { %>
+        <p class='error'><%= errors.errors[x].message %></p>
+        <% } %>
+        
+        <% if(errors.errmsg) { %>
+            <p class ='error'>Email is already in database, please login or try another!</p>
+        <% } %>
+    <% } %>
+    
+    <hr>
+    <h1>Registration</h1>
+    <form action="/register" method="post">
+       First Name: <input type="text" name="first_name">
+       Last Name: <input type="text" name="last_name">
+       Email: <input type="email" name="email">
+       Password: <input type="password" name="password">
+       Confirm Password: <input type="password" name="confirm_password">
+       Birthday: <input type="date" name="birthday">
+       <input type="submit" value="Register">
+    </form>
+</body>
+</html>

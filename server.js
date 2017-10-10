@@ -1,0 +1,17 @@
+const express = require('express')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const path = require('path')
+const app = express()
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(session({secret: 'thisissecret'}))
+app.use(express.static(path.resolve(__dirname, 'client/static')))
+app.set('views', path.resolve(__dirname, 'client/views'))
+app.set('view engine', 'ejs')
+require('./server/config/mongoose')
+const routes_setter = require('./server/config/routes.js')
+routes_setter(app)
+app.listen(8000, () => {
+    console.log("listening on port 8000")
+})
